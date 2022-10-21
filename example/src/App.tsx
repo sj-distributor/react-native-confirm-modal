@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import {
   ConfirmModalProvider,
   useConfirmModal,
@@ -37,3 +37,11 @@ export default function App() {
     </ConfirmModalProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
