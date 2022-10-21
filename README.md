@@ -1,21 +1,65 @@
-# @sj-distributor/react-native-confirm-modal
+# :rainbow: react-native-confirm-modal
 
-A React Native Modal
+[![Npm Version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/react-native-month-switch)
+[![MIT License](https://img.shields.io/npm/l/react-native-tab-view.svg?style=flat-square)](https://www.npmjs.com/package/react-native-month-switch)
+[![Preview](https://github.com/Simoon-F/react-native-month-switch/actions/workflows/preview.yml/badge.svg)](https://github.com/Simoon-F/react-native-month-switch/actions/workflows/preview.yml)
+
+A React Native Confirm Modal
 
 ## Installation
 
 ```sh
+yarn add @sj-distributor/react-native-confirm-modal
+
+or
+
 npm install @sj-distributor/react-native-confirm-modal
 ```
 
+## Demo
+
 ## Usage
 
-```js
-import ReactNativeModal from '@sj-distributor/react-native-confirm-modal';
+```ts
+import React from 'react';
 
-// ...
+import { View, Button } from 'react-native';
+import {
+  ConfirmModalProvider,
+  useConfirmModal,
+} from '@sj-distributor/react-native-confirm-modal';
 
-const result = await ReactNativeModal.multiply(3, 7);
+const Demo = () => {
+  const { showConfirmModal } = useConfirmModal();
+
+  return (
+    <View style={styles.container}>
+      <Button
+        title={'Click Demo'}
+        onPress={() => {
+          showConfirmModal({
+            title: 'Demo',
+            description: 'Here is a demo',
+            onCancel: () => {
+              console.log('onCancel');
+            },
+            onConfirm: () => {
+              console.log('onConfirm');
+            },
+          });
+        }}
+      />
+    </View>
+  );
+};
+
+export default function App() {
+  return (
+    <ConfirmModalProvider>
+      <Demo />
+    </ConfirmModalProvider>
+  );
+}
 ```
 
 ## Contributing
