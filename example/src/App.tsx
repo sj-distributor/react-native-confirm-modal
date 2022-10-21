@@ -1,20 +1,40 @@
-import * as React from 'react';
+import React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import ReactNativeModal from '@sj-distributor/react-native-modal';
+import { StyleSheet, View, Button } from 'react-native';
+import {
+  ConfirmModalProvider,
+  useConfirmModal,
+} from '@sj-distributor/react-native-confirm-modal';
 
-
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    ReactNativeModal.multiply(3, 7).then(setResult);
-  }, []);
+const Demo = () => {
+  const { showConfirmModal } = useConfirmModal();
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button
+        title={'Click Demo'}
+        onPress={() => {
+          showConfirmModal({
+            title: 'Demo',
+            description: 'Here is a demo',
+            onCancel: () => {
+              console.log('onCancel');
+            },
+            onConfirm: () => {
+              console.log('onConfirm');
+            },
+          });
+        }}
+      />
     </View>
+  );
+};
+
+export default function App() {
+  return (
+    <ConfirmModalProvider>
+      <Demo />
+    </ConfirmModalProvider>
   );
 }
 

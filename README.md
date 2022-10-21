@@ -1,17 +1,17 @@
-# @sj-distributor/react-native-modal
+# @sj-distributor/react-native-confirm-modal
 
 A React Native Modal
 
 ## Installation
 
 ```sh
-npm install @sj-distributor/react-native-modal
+npm install @sj-distributor/react-native-confirm-modal
 ```
 
 ## Usage
 
 ```js
-import ReactNativeModal from "@sj-distributor/react-native-modal";
+import ReactNativeModal from '@sj-distributor/react-native-confirm-modal';
 
 // ...
 

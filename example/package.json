@@ -1,6 +1,6 @@
 {
-  "name": "@sj-distributor/react-native-modal-example",
-  "description": "Example app for @sj-distributor/react-native-modal",
+  "name": "@sj-distributor/react-native-confirm-modal-example",
+  "description": "Example app for @sj-distributor/react-native-confirm-modal",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/runtime": "^7.12.5",
+    "@types/react-native": "^0.70.4",
     "babel-plugin-module-resolver": "^4.0.0",
     "metro-react-native-babel-preset": "^0.64.0"
   }
