@@ -18,12 +18,14 @@ import Styles from './style';
 import type { ConfirmModalType, IConfirmModalProps } from './types';
 
 const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
-  const [options, setOptions] = useState<IConfirmModalProps>({});
+  const [options, setOptions] = useState<IConfirmModalProps>({
+    confirmText: '',
+  });
 
   const {
     title,
     description,
-    cancelText = 'Cancel',
+    cancelText,
     confirmText = 'Confirm',
     onCancel,
     onConfirm,
@@ -80,7 +82,7 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
             <View style={styles.buttonStyle}>
               {cancelText && (
                 <TouchableOpacity
-                  activeOpacity={0.8}
+                  activeOpacity={0.6}
                   onPress={_onCancel}
                   style={[
                     styles.button,
@@ -103,12 +105,13 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
 
               {confirmText && (
                 <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={_onConfirm}
                   style={[
                     styles.button,
                     styles.confirmButtonStyle,
                     confirmStyle,
                   ]}
-                  onPress={_onConfirm}
                 >
                   <Text
                     style={[
