@@ -1,6 +1,6 @@
 {
   "name": "@sj-distributor/react-native-confirm-modal",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A React Native Confirm Modal",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
