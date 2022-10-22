@@ -16,7 +16,7 @@ export interface IConfirmModalProps {
   title?: string;
   description?: string;
   cancelText?: string;
-  confirmText?: string;
+  confirmText: string | undefined;
   onCancel?: () => void;
   onConfirm?: () => void;
   cancelStyle?: StyleProp<ViewStyle>;

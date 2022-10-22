@@ -16,7 +16,26 @@ const Demo = () => {
         onPress={() => {
           showConfirmModal({
             title: 'Demo',
+            confirmText: '確認',
             description: 'Here is a demo',
+            onCancel: () => {
+              console.log('onCancel');
+            },
+            onConfirm: () => {
+              console.log('onConfirm');
+            },
+          });
+        }}
+      />
+
+      <Button
+        title={'Click Demo 2'}
+        onPress={() => {
+          showConfirmModal({
+            title: 'Demo 2',
+            confirmText: 'OK',
+            cancelText: 'Close',
+            description: 'Here is a demo 2',
             onCancel: () => {
               console.log('onCancel');
             },
