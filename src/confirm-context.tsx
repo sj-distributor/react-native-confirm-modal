@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  createRef,
-  FC,
-  useContext,
-  useState,
-} from 'react';
+import React, { createContext, createRef, FC, useContext } from 'react';
 import ConfirmModal from './confirm-modal';
 import type {
   ConfirmModalContextType,
@@ -17,29 +11,23 @@ export const ConfirmModalContext = createContext<ConfirmModalContextType>({
   showConfirmModal: () => null,
 });
 
-export const useConfirmModal = () => {
-  return useContext(ConfirmModalContext);
-};
+export const useConfirmModal = () => useContext(ConfirmModalContext);
 
 export const ConfirmModalProvider: FC<IConfirmModalProviderProps> = ({
   children,
 }) => {
   const _confirmModalRef = createRef<ConfirmModalType>();
 
-  const [options, setOptions] = useState<IConfirmModalProps>();
-
-  const showConfirmModal = (overrideOptions: IConfirmModalProps) => {
-    setOptions({ ...overrideOptions });
-
+  const showConfirmModal = (options: IConfirmModalProps) => {
     _confirmModalRef.current !== null &&
-      _confirmModalRef.current.showConfirmModal();
+      _confirmModalRef.current.showConfirmModal(options);
   };
 
   return (
     <ConfirmModalContext.Provider value={{ showConfirmModal }}>
       {children}
 
-      <ConfirmModal ref={_confirmModalRef} {...options} />
+      <ConfirmModal ref={_confirmModalRef} />
     </ConfirmModalContext.Provider>
   );
 };

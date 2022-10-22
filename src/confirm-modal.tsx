@@ -9,7 +9,6 @@ import {
   View,
   Modal as RNModal,
   Text,
-  Pressable,
   TouchableOpacity,
   StyleSheet,
   StyleProp,
@@ -17,65 +16,69 @@ import {
 } from 'react-native';
 import Styles from './style';
 import type { ConfirmModalType, IConfirmModalProps } from './types';
-import PropTypes from 'prop-types';
 
-const ConfirmModal = forwardRef<ConfirmModalType, IConfirmModalProps>(
-  (props, ref) => {
-    const {
-      title,
-      description,
-      cancelText,
-      confirmText,
-      onCancel,
-      onConfirm,
-      cancelStyle,
-      confirmStyle,
-    } = props;
+const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
+  const [options, setOptions] = useState<IConfirmModalProps>({});
 
-    useImperativeHandle(ref, () => ({
-      showConfirmModal,
-    }));
+  const {
+    title,
+    description,
+    cancelText = 'Cancel',
+    confirmText = 'Confirm',
+    onCancel,
+    onConfirm,
+    cancelStyle,
+    confirmStyle,
+    cancelTextStyle,
+    confirmTextStyle,
+  } = useMemo(() => options, [options]);
 
-    const styles = useRef(Styles()).current;
+  useImperativeHandle(ref, () => ({
+    showConfirmModal,
+  }));
 
-    const [open, setOpen] = useState<boolean>(false);
+  const styles = useRef(Styles()).current;
 
-    const showConfirmModal = () => {
-      setOpen(true);
+  const [open, setOpen] = useState<boolean>(false);
 
-      // 设置动画
-    };
+  const showConfirmModal = (overrideOptions: IConfirmModalProps) => {
+    setOptions({ ...overrideOptions });
 
-    const _onCancel = () => {
-      setOpen(false);
+    setOpen(true);
+  };
 
-      onCancel && onCancel();
-    };
+  const _onCancel = () => {
+    setOpen(false);
 
-    const _onConfirm = () => {
-      setOpen(false);
+    onCancel && onCancel();
+  };
 
-      onConfirm && onConfirm();
-    };
+  const _onConfirm = () => {
+    setOpen(false);
 
-    const borderRightWidthStyle = useMemo((): StyleProp<ViewStyle> => {
-      return {
-        borderRightWidth:
-          cancelText && confirmText ? StyleSheet.hairlineWidth : 0,
-      };
-    }, [cancelText, confirmText]);
+    onConfirm && onConfirm();
+  };
 
-    return (
-      <View style={styles.flexContainer}>
-        <RNModal transparent visible={open} animationType={'none'}>
-          <View style={styles.container}>
-            <View style={styles.modalView}>
-              {!!title && <Text style={styles.titleStyle}>{title}</Text>}
+  const borderRightWidthStyle = useMemo(
+    (): StyleProp<ViewStyle> => ({
+      borderRightWidth:
+        cancelText && confirmText ? StyleSheet.hairlineWidth : 0,
+    }),
+    [cancelText, confirmText]
+  );
 
-              {!!description && (
-                <Text style={styles.descriptionStyle}>{description}</Text>
-              )}
-              <View style={styles.buttonStyle}>
+  return (
+    <View style={styles.flexContainer}>
+      <RNModal transparent visible={open} animationType={'none'}>
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            {!!title && <Text style={styles.titleStyle}>{title}</Text>}
+
+            {!!description && (
+              <Text style={styles.descriptionStyle}>{description}</Text>
+            )}
+            <View style={styles.buttonStyle}>
+              {cancelText && (
                 <TouchableOpacity
                   activeOpacity={0.8}
                   onPress={_onCancel}
@@ -86,11 +89,20 @@ const ConfirmModal = forwardRef<ConfirmModalType, IConfirmModalProps>(
                     cancelStyle,
                   ]}
                 >
-                  <Text style={[styles.textStyle, styles.cancelButtonStyle]}>
+                  <Text
+                    style={[
+                      styles.textStyle,
+                      styles.cancelButtonStyle,
+                      cancelTextStyle,
+                    ]}
+                  >
                     {cancelText}
                   </Text>
                 </TouchableOpacity>
-                <Pressable
+              )}
+
+              {confirmText && (
+                <TouchableOpacity
                   style={[
                     styles.button,
                     styles.confirmButtonStyle,
@@ -98,30 +110,24 @@ const ConfirmModal = forwardRef<ConfirmModalType, IConfirmModalProps>(
                   ]}
                   onPress={_onConfirm}
                 >
-                  <Text style={styles.textStyle}>{confirmText}</Text>
-                </Pressable>
-              </View>
+                  <Text
+                    style={[
+                      styles.textStyle,
+                      styles.confirmButtonStyle,
+                      confirmTextStyle,
+                    ]}
+                  >
+                    {confirmText}
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
-        </RNModal>
-      </View>
-    );
-  }
-);
+        </View>
+      </RNModal>
+    </View>
+  );
+});
 
 export default ConfirmModal;
 ConfirmModal.displayName = 'ConfirmModal';
-ConfirmModal.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  cancelText: PropTypes.string,
-  confirmText: PropTypes.string,
-  onCancel: PropTypes.func,
-  onConfirm: PropTypes.func,
-  cancelStyle: PropTypes.object,
-  confirmStyle: PropTypes.object,
-};
-ConfirmModal.defaultProps = {
-  cancelText: 'Cancel',
-  confirmText: 'Confirm',
-};
