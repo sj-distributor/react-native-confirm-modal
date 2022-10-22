@@ -18,7 +18,7 @@ import {
   EasingFunction,
 } from 'react-native';
 import Styles from './style';
-import type { ConfirmModalType, IConfirmModalProps } from './types';
+import type { ConfirmModalContextType, IConfirmModalProps } from './types';
 
 const EasignOut: EasingFunction = Easing.bezier(0.25, 0.46, 0.45, 0.94);
 const EasingIn: EasingFunction = Easing.out(EasignOut);
@@ -28,7 +28,7 @@ const AnimatedDuration: number = 200;
 const OverlayOpacity: Animated.Value = new Animated.Value(0);
 const ModalOpacity: Animated.Value = new Animated.Value(0);
 
-const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
+const ConfirmModal = forwardRef<ConfirmModalContextType>((_, ref) => {
   const [options, setOptions] = useState<IConfirmModalProps>({
     confirmText: '',
   });
@@ -59,55 +59,55 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
 
     setOpen(true);
 
-    _animateIn();
+    animateIn();
   };
 
   const _onCancel = () => {
-    _animateOut();
+    animateOut();
 
     onCancel && onCancel();
   };
 
   const _onConfirm = () => {
-    _animateOut();
+    animateOut();
 
     onConfirm && onConfirm();
   };
 
-  const _animateIn = () => {
+  const animateIn = () => {
     OverlayOpacity.setValue(0);
 
     Animated.parallel([
       Animated.timing(OverlayOpacity, {
         toValue: 0.32,
         easing: EasignOut,
-        duration: AnimatedDuration,
         useNativeDriver: true,
+        duration: AnimatedDuration,
       }),
 
       Animated.timing(ModalOpacity, {
         toValue: 1,
         easing: EasignOut,
-        duration: AnimatedDuration,
         useNativeDriver: true,
+        duration: AnimatedDuration,
       }),
     ]).start();
   };
 
-  const _animateOut = () => {
+  const animateOut = () => {
     Animated.parallel([
       Animated.timing(OverlayOpacity, {
         toValue: 0,
         easing: EasingIn,
-        duration: AnimatedDuration,
         useNativeDriver: true,
+        duration: AnimatedDuration,
       }),
 
       Animated.timing(ModalOpacity, {
         toValue: 0,
         easing: EasignOut,
-        duration: AnimatedDuration,
         useNativeDriver: true,
+        duration: AnimatedDuration,
       }),
     ]).start(() => setOpen(false));
   };
@@ -147,7 +147,7 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
               <Text style={styles.descriptionStyle}>{description}</Text>
             )}
             <View style={styles.buttonStyle}>
-              {cancelText && (
+              {!!cancelText && (
                 <TouchableOpacity
                   activeOpacity={0.6}
                   onPress={_onCancel}
@@ -170,7 +170,7 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
                 </TouchableOpacity>
               )}
 
-              {confirmText && (
+              {!!confirmText && (
                 <TouchableOpacity
                   activeOpacity={0.6}
                   onPress={_onConfirm}
