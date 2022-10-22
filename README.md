@@ -1,8 +1,8 @@
 # :rainbow: react-native-confirm-modal
 
-[![Npm Version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/react-native-month-switch)
-[![MIT License](https://img.shields.io/npm/l/react-native-tab-view.svg?style=flat-square)](https://www.npmjs.com/package/react-native-month-switch)
-[![Preview](https://github.com/Simoon-F/react-native-month-switch/actions/workflows/preview.yml/badge.svg)](https://github.com/Simoon-F/react-native-month-switch/actions/workflows/preview.yml)
+[![Npm Version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/@sj-distributor/react-native-confirm-modal)
+[![MIT License](https://img.shields.io/npm/l/react-native-tab-view.svg?style=flat-square)](https://www.npmjs.com/package/@sj-distributor/react-native-confirm-modal)
+[![Preview](https://github.com/Simoon-F/react-native-confirm-modal/actions/workflows/preview.yml/badge.svg)](https://github.com/Simoon-F/react-native-confirm-modal/actions/workflows/preview.yml)
 
 A React Native Confirm Modal
 
