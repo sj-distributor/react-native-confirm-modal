@@ -1,15 +1,12 @@
+import type { ReactNode } from 'react';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type ConfirmModalContextType = {
   showConfirmModal: (options: IConfirmModalProps) => void;
 };
 
-export type ConfirmModalType = {
-  showConfirmModal: (options: IConfirmModalProps) => void;
-};
-
 export interface IConfirmModalProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export interface IConfirmModalProps {
