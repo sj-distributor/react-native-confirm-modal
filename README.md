@@ -18,6 +18,8 @@ npm install @sj-distributor/react-native-confirm-modal
 
 ## Demo
 
+<a href="https://raw.githubusercontent.com/Simoon-F/react-native-confirm-modal/master/demo/demo.gif"><img src="https://raw.githubusercontent.com/Simoon-F/react-native-confirm-modal/master/demo/demo.gif" width="360"></a>
+
 ## Usage
 
 ```ts
@@ -39,7 +41,26 @@ const Demo = () => {
         onPress={() => {
           showConfirmModal({
             title: 'Demo',
+            confirmText: '確認',
             description: 'Here is a demo',
+            onCancel: () => {
+              console.log('onCancel');
+            },
+            onConfirm: () => {
+              console.log('onConfirm');
+            },
+          });
+        }}
+      />
+
+      <Button
+        title={'Click Demo 2'}
+        onPress={() => {
+          showConfirmModal({
+            title: 'Demo 2',
+            confirmText: 'OK',
+            cancelText: 'Close',
+            description: 'Here is a demo 2',
             onCancel: () => {
               console.log('onCancel');
             },
@@ -72,7 +93,24 @@ const styles = StyleSheet.create({
 
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+## Contributing
+
+While developing, you can run the [example app](https://github.com/Simoon-F/react-native-confirm-modal/blob/master/example/README.md) to test your changes.
+
+Make sure your code passes TypeScript and ESLint. Run the following to verify:
+
+```
+yarn typescript
+yarn lint
+```
+
+To fix formatting errors, run the following:
+
+```
+yarn lint --fix
+```
+
+Remember to add tests for your change if possible.
 
 ## License
 
