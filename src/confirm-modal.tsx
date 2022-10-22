@@ -13,9 +13,20 @@ import {
   StyleSheet,
   StyleProp,
   ViewStyle,
+  Animated,
+  Easing,
+  EasingFunction,
 } from 'react-native';
 import Styles from './style';
 import type { ConfirmModalType, IConfirmModalProps } from './types';
+
+const EasignOut: EasingFunction = Easing.bezier(0.25, 0.46, 0.45, 0.94);
+const EasingIn: EasingFunction = Easing.out(EasignOut);
+
+const AnimatedDuration: number = 200;
+
+const OverlayOpacity: Animated.Value = new Animated.Value(0);
+const ModalOpacity: Animated.Value = new Animated.Value(0);
 
 const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
   const [options, setOptions] = useState<IConfirmModalProps>({
@@ -47,18 +58,58 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
     setOptions({ ...overrideOptions });
 
     setOpen(true);
+
+    _animateIn();
   };
 
   const _onCancel = () => {
-    setOpen(false);
+    _animateOut();
 
     onCancel && onCancel();
   };
 
   const _onConfirm = () => {
-    setOpen(false);
+    _animateOut();
 
     onConfirm && onConfirm();
+  };
+
+  const _animateIn = () => {
+    OverlayOpacity.setValue(0);
+
+    Animated.parallel([
+      Animated.timing(OverlayOpacity, {
+        toValue: 0.32,
+        easing: EasignOut,
+        duration: AnimatedDuration,
+        useNativeDriver: true,
+      }),
+
+      Animated.timing(ModalOpacity, {
+        toValue: 1,
+        easing: EasignOut,
+        duration: AnimatedDuration,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const _animateOut = () => {
+    Animated.parallel([
+      Animated.timing(OverlayOpacity, {
+        toValue: 0,
+        easing: EasingIn,
+        duration: AnimatedDuration,
+        useNativeDriver: true,
+      }),
+
+      Animated.timing(ModalOpacity, {
+        toValue: 0,
+        easing: EasignOut,
+        duration: AnimatedDuration,
+        useNativeDriver: true,
+      }),
+    ]).start(() => setOpen(false));
   };
 
   const borderRightWidthStyle = useMemo(
@@ -72,7 +123,23 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
   return (
     <View style={styles.flexContainer}>
       <RNModal transparent visible={open} animationType={'none'}>
-        <View style={styles.container}>
+        <Animated.View
+          style={[
+            styles.overlay,
+            {
+              opacity: OverlayOpacity,
+            },
+          ]}
+        />
+
+        <Animated.View
+          style={[
+            styles.container,
+            {
+              opacity: ModalOpacity,
+            },
+          ]}
+        >
           <View style={styles.modalView}>
             {!!title && <Text style={styles.titleStyle}>{title}</Text>}
 
@@ -126,7 +193,7 @@ const ConfirmModal = forwardRef<ConfirmModalType>((_, ref) => {
               )}
             </View>
           </View>
-        </View>
+        </Animated.View>
       </RNModal>
     </View>
   );

@@ -21,7 +21,6 @@ export default function () {
     },
     container: {
       alignItems: 'center',
-      backgroundColor: 'rgba(0,0,0,0.2)',
       flex: 1,
       justifyContent: 'center',
       paddingLeft: 40,
@@ -55,6 +54,14 @@ export default function () {
       fontWeight: '600',
       marginBottom: 15,
       textAlign: 'center',
+    },
+    overlay: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      backgroundColor: 'black',
     },
   });
 }
