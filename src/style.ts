@@ -33,6 +33,8 @@ export default function () {
       borderBottomRightRadius: 20,
     },
     descriptionStyle: {
+      marginLeft: 10,
+      marginRight: 10,
       marginBottom: 15,
       textAlign: 'center',
     },
