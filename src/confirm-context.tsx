@@ -2,7 +2,7 @@ import React, { createContext, createRef, FC, useContext } from 'react';
 import ConfirmModal from './confirm-modal';
 import type {
   ConfirmModalContextType,
-  IConfirmModalProps,
+  IConfirmModalType,
   IConfirmModalProviderProps,
 } from './types';
 
@@ -17,7 +17,7 @@ export const ConfirmModalProvider: FC<IConfirmModalProviderProps> = ({
 }) => {
   const confirmModalRef = createRef<ConfirmModalContextType>();
 
-  const showConfirmModal = (options: IConfirmModalProps) => {
+  const showConfirmModal = (options: IConfirmModalType) => {
     confirmModalRef.current !== null &&
       confirmModalRef.current.showConfirmModal(options);
   };

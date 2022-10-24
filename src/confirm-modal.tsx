@@ -18,7 +18,7 @@ import {
   EasingFunction,
 } from 'react-native';
 import Styles from './style';
-import type { ConfirmModalContextType, IConfirmModalProps } from './types';
+import type { ConfirmModalContextType, IConfirmModalType } from './types';
 
 const EasignOut: EasingFunction = Easing.bezier(0.25, 0.46, 0.45, 0.94);
 const EasingIn: EasingFunction = Easing.out(EasignOut);
@@ -29,14 +29,12 @@ const OverlayOpacity: Animated.Value = new Animated.Value(0);
 const ModalOpacity: Animated.Value = new Animated.Value(0);
 
 const ConfirmModal = forwardRef<ConfirmModalContextType>((_, ref) => {
-  const [options, setOptions] = useState<IConfirmModalProps>({
-    confirmText: '',
-  });
+  const [options, setOptions] = useState<IConfirmModalType>({});
 
   const {
     title,
     description,
-    cancelText,
+    cancelText = 'Cancel',
     confirmText = 'Confirm',
     onCancel,
     onConfirm,
@@ -44,6 +42,7 @@ const ConfirmModal = forwardRef<ConfirmModalContextType>((_, ref) => {
     confirmStyle,
     cancelTextStyle,
     confirmTextStyle,
+    cancelTextVisible = true,
   } = useMemo(() => options, [options]);
 
   useImperativeHandle(ref, () => ({
@@ -54,7 +53,7 @@ const ConfirmModal = forwardRef<ConfirmModalContextType>((_, ref) => {
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const showConfirmModal = (overrideOptions: IConfirmModalProps) => {
+  const showConfirmModal = (overrideOptions: IConfirmModalType) => {
     setOptions({ ...overrideOptions });
 
     setOpen(true);
@@ -147,7 +146,7 @@ const ConfirmModal = forwardRef<ConfirmModalContextType>((_, ref) => {
               <Text style={styles.descriptionStyle}>{description}</Text>
             )}
             <View style={styles.buttonStyle}>
-              {!!cancelText && (
+              {!!cancelText && !!cancelTextVisible && (
                 <TouchableOpacity
                   activeOpacity={0.6}
                   onPress={_onCancel}
