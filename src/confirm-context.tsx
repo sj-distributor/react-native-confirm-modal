@@ -15,18 +15,18 @@ export const useConfirmModal = () => useContext(ConfirmModalContext);
 export const ConfirmModalProvider: FC<IConfirmModalProviderProps> = ({
   children,
 }) => {
-  const _confirmModalRef = createRef<ConfirmModalContextType>();
+  const confirmModalRef = createRef<ConfirmModalContextType>();
 
   const showConfirmModal = (options: IConfirmModalProps) => {
-    _confirmModalRef.current !== null &&
-      _confirmModalRef.current.showConfirmModal(options);
+    confirmModalRef.current !== null &&
+      confirmModalRef.current.showConfirmModal(options);
   };
 
   return (
     <ConfirmModalContext.Provider value={{ showConfirmModal }}>
       {children}
 
-      <ConfirmModal ref={_confirmModalRef} />
+      <ConfirmModal ref={confirmModalRef} />
     </ConfirmModalContext.Provider>
   );
 };
