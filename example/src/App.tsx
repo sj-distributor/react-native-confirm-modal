@@ -3,37 +3,33 @@ import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import {
   ConfirmModalProvider,
-  useConfirmModal,
+  useConfirm,
 } from '@sj-distributor/react-native-confirm-modal';
 
 const Demo = () => {
-  const { showConfirmModal } = useConfirmModal();
+  const { confirm } = useConfirm();
 
   return (
     <View style={styles.container}>
       <Button
         title={'Click Demo'}
-        onPress={() => {
-          showConfirmModal({
+        onPress={async () => {
+          const isOk = await confirm({
             title: 'Demo',
             confirmText: 'Confirm',
             description: `Here is a demo
 Here is a demo
 Here is a demo`,
-            onCancel: () => {
-              console.log('onCancel');
-            },
-            onConfirm: () => {
-              console.log('onConfirm');
-            },
           });
+
+          console.log(isOk);
         }}
       />
 
       <Button
         title={'Click Demo 2'}
         onPress={() => {
-          showConfirmModal({
+          confirm({
             title: 'Demo 2',
             confirmText: 'OK',
             cancelText: 'Close',
