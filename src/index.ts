@@ -1,2 +1,2 @@
-export { useConfirmModal, ConfirmModalProvider } from './confirm-context';
+export { useConfirm, ConfirmModalProvider } from './confirm-context';
 export * from './types';

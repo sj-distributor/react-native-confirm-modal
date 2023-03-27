@@ -2,14 +2,14 @@ import type { ReactNode } from 'react';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type ConfirmModalContextType = {
-  showConfirmModal: (options: IConfirmModalType) => void;
+  confirm: (options: ConfirmModalType) => Promise<boolean>;
 };
 
 export interface IConfirmModalProviderProps {
   children: ReactNode;
 }
 
-export type IConfirmModalType = {
+export type ConfirmModalType = {
   title?: string;
   description?: string;
   cancelText?: string;
@@ -22,3 +22,23 @@ export type IConfirmModalType = {
   confirmTextStyle?: StyleProp<TextStyle>;
   cancelTextVisible?: boolean;
 };
+
+export interface IConfirmDialogProps {
+  open: boolean;
+  title?: string;
+  description?: string;
+  cancelText?: string;
+  confirmText?: string;
+  onCancel?: () => void;
+  onConfirm?: () => void;
+  cancelStyle?: StyleProp<ViewStyle>;
+  confirmStyle?: StyleProp<ViewStyle>;
+  cancelTextStyle?: StyleProp<TextStyle>;
+  confirmTextStyle?: StyleProp<TextStyle>;
+  cancelTextVisible?: boolean;
+}
+
+export type ResolveRejectType = [
+  (value: boolean | PromiseLike<boolean>) => void,
+  (reason?: any) => void
+];
