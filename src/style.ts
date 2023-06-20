@@ -15,7 +15,7 @@ export default function () {
       padding: 11,
       textAlign: 'center',
     },
-    buttonStyle: {
+    buttonContainerStyle: {
       display: 'flex',
       flexDirection: 'row',
     },
@@ -42,8 +42,8 @@ export default function () {
       alignItems: 'center',
       backgroundColor: '#efefef',
       borderRadius: 20,
-      margin: 20,
       paddingTop: 20,
+      marginHorizontal: 16,
     },
     textStyle: {
       color: '#3874f6',
@@ -54,7 +54,7 @@ export default function () {
       color: '#000000',
       fontSize: 19,
       fontWeight: '600',
-      marginBottom: 15,
+      marginBottom: 5,
       textAlign: 'center',
     },
     overlay: {
