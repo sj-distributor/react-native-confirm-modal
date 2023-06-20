@@ -31,11 +31,15 @@ const ConfirmDialog = memo(
     cancelText = 'Cancel',
     confirmText = 'Confirm',
     description,
+    titleStyle: overrideTitleStyle,
     cancelStyle,
     confirmStyle,
+    containerStyle,
     cancelTextStyle,
     confirmTextStyle,
+    descriptionStyle: overrideDescriptionStyle,
     cancelTextVisible = true,
+    buttonContainerStyle: overrideButtonContainerStyle,
   }: IConfirmDialogProps) => {
     const styles = useRef(Styles()).current;
 
@@ -123,13 +127,26 @@ const ConfirmDialog = memo(
               },
             ]}
           >
-            <View style={styles.modalView}>
-              {!!title && <Text style={styles.titleStyle}>{title}</Text>}
+            <View style={[styles.modalView, containerStyle]}>
+              {!!title && (
+                <Text style={[styles.titleStyle, overrideTitleStyle]}>
+                  {title}
+                </Text>
+              )}
 
               {!!description && (
-                <Text style={styles.descriptionStyle}>{description}</Text>
+                <Text
+                  style={[styles.descriptionStyle, overrideDescriptionStyle]}
+                >
+                  {description}
+                </Text>
               )}
-              <View style={styles.buttonStyle}>
+              <View
+                style={[
+                  styles.buttonContainerStyle,
+                  overrideButtonContainerStyle,
+                ]}
+              >
                 {!!cancelText && !!cancelTextVisible && (
                   <TouchableOpacity
                     activeOpacity={0.6}

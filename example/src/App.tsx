@@ -20,6 +20,35 @@ const Demo = () => {
             description: `Here is a demo
 Here is a demo
 Here is a demo`,
+            containerStyle: {
+              paddingTop: 19,
+              marginHorizontal: 16,
+              backgroundColor: 'rgba(242, 242, 242, 0.8)',
+            },
+            titleStyle: {
+              color: 'rgba(0, 0, 0, 0.8)',
+              fontSize: 16,
+              lineHeight: 24,
+              fontWeight: 'bold',
+            },
+            descriptionStyle: {
+              color: 'rgba(0, 0, 0, 0.6)',
+              fontSize: 14,
+              lineHeight: 21,
+              fontWeight: '400',
+            },
+            cancelTextStyle: {
+              color: '#007AFF',
+              fontSize: 17,
+              lineHeight: 22,
+              fontWeight: '400',
+            },
+            confirmTextStyle: {
+              color: '#007AFF',
+              fontSize: 17,
+              lineHeight: 22,
+              fontWeight: 'bold',
+            },
           });
 
           console.log(isOk);
