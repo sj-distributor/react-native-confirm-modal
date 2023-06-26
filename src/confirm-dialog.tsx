@@ -39,6 +39,7 @@ const ConfirmDialog = memo(
     confirmTextStyle,
     descriptionStyle: overrideDescriptionStyle,
     cancelTextVisible = true,
+    modalBackgroundStyle,
     buttonContainerStyle: overrideButtonContainerStyle,
   }: IConfirmDialogProps) => {
     const styles = useRef(Styles()).current;
@@ -125,6 +126,7 @@ const ConfirmDialog = memo(
               {
                 opacity: ModalOpacity,
               },
+              modalBackgroundStyle,
             ]}
           >
             <View style={[styles.modalView, containerStyle]}>

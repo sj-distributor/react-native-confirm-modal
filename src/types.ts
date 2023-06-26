@@ -38,6 +38,8 @@ export type ConfirmModalType = {
 
   cancelTextVisible?: boolean;
 
+  modalBackgroundStyle?: StyleProp<ViewStyle>;
+
   buttonContainerStyle?: StyleProp<ViewStyle>;
 };
 
@@ -71,6 +73,8 @@ export interface IConfirmDialogProps {
   descriptionStyle?: StyleProp<TextStyle>;
 
   cancelTextVisible?: boolean;
+
+  modalBackgroundStyle?: StyleProp<ViewStyle>;
 
   buttonContainerStyle?: StyleProp<ViewStyle>;
 }
