@@ -12,7 +12,7 @@ import {
   EasingFunction,
 } from 'react-native';
 import Styles from './style';
-import type { IConfirmDialogProps } from './types';
+import type { ConfirmDialogProps } from './types';
 
 const EasignOut: EasingFunction = Easing.bezier(0.25, 0.46, 0.45, 0.94);
 const EasingIn: EasingFunction = Easing.out(EasignOut);
@@ -36,12 +36,13 @@ const ConfirmDialog = memo(
     confirmStyle,
     containerStyle,
     cancelTextStyle,
+    allowFontScaling = true,
     confirmTextStyle,
     descriptionStyle: overrideDescriptionStyle,
     cancelTextVisible = true,
     modalBackgroundStyle,
     buttonContainerStyle: overrideButtonContainerStyle,
-  }: IConfirmDialogProps) => {
+  }: ConfirmDialogProps) => {
     const styles = useRef(Styles()).current;
 
     useEffect(() => {
@@ -110,7 +111,7 @@ const ConfirmDialog = memo(
 
     return (
       <View style={styles.flexContainer}>
-        <RNModal transparent visible={open} animationType={'none'}>
+        <RNModal visible={open} transparent animationType={'none'}>
           <Animated.View
             style={[
               styles.overlay,
@@ -131,7 +132,10 @@ const ConfirmDialog = memo(
           >
             <View style={[styles.modalView, containerStyle]}>
               {!!title && (
-                <Text style={[styles.titleStyle, overrideTitleStyle]}>
+                <Text
+                  style={[styles.titleStyle, overrideTitleStyle]}
+                  allowFontScaling={allowFontScaling}
+                >
                   {title}
                 </Text>
               )}
@@ -139,10 +143,12 @@ const ConfirmDialog = memo(
               {!!description && (
                 <Text
                   style={[styles.descriptionStyle, overrideDescriptionStyle]}
+                  allowFontScaling={allowFontScaling}
                 >
                   {description}
                 </Text>
               )}
+
               <View
                 style={[
                   styles.buttonContainerStyle,
@@ -166,6 +172,7 @@ const ConfirmDialog = memo(
                         styles.cancelButtonStyle,
                         cancelTextStyle,
                       ]}
+                      allowFontScaling={allowFontScaling}
                     >
                       {cancelText}
                     </Text>
@@ -188,6 +195,7 @@ const ConfirmDialog = memo(
                         styles.confirmButtonStyle,
                         confirmTextStyle,
                       ]}
+                      allowFontScaling={allowFontScaling}
                     >
                       {confirmText}
                     </Text>
